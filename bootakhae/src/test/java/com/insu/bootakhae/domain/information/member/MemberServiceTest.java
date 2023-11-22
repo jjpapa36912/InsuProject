@@ -2,6 +2,7 @@ package com.insu.bootakhae.domain.information.member;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
+
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class MemberServiceTest {
   MemberService memberService;
 
   @Test
-  public void save() {
+  void save() {
     MemberEntity memberEntity = new MemberEntity("testId1", "testName1", "testPassword1");
 
     memberService.save(memberEntity);

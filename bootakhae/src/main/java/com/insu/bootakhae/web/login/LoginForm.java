@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class LoginForm {
 
-    @NotNull(message = "비어 있을 수 없지롱")
-    private String loginId;
+  @NotNull(message = "비어 있을 수 없지롱")
+  private String loginId;
 
-    @NotEmpty
-    private String password;
+  @NotEmpty
+  private String password;
 }

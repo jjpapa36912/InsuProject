@@ -21,37 +21,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final LoginService loginService;
+  private final LoginService loginService;
+  private static final String LOGIN_FORM_HTML = "login/loginForm";
 
-    @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
-        return "login/loginForm";
+  @GetMapping("/login")
+  public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
+    return LOGIN_FORM_HTML;
+  }
+
+  @PostMapping("/login")
+  public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
+      HttpServletRequest request,
+      @RequestParam(defaultValue = "/login") String redirectURL) {
+
+    if (bindingResult.hasErrors()) {
+      return LOGIN_FORM_HTML;
     }
+    log.info("========form.getLoginId()======{}", form.getLoginId());
+    log.info("========form.getPassword()======{}", form.getPassword());
+    MemberEntity loginMember = loginService.login(form.getLoginId(), form.getPassword());
 
-    @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request,
-                            @RequestParam(defaultValue = "/login") String redirectURL) {
-
-        if (bindingResult.hasErrors()) {
-            return "login/loginForm";
-        }
-        log.info("========form.getLoginId()======{}", form.getLoginId());
-        log.info("========form.getPassword()======{}", form.getPassword());
-        MemberEntity loginMember = loginService.login(form.getLoginId(), form.getPassword());
-
-        if (loginMember == null) {
-            log.info("===========if (loginMember == null)===============");
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다");
-            return "login/loginForm";
-        }
-        //세션이 있으면 세션 반환, 없으면 신규 세션을 생성
-        HttpSession session = request.getSession();
-        //세션에 로그인 회원 정보 보관
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-        log.info("redirectURL = ", redirectURL);
-
-        return "redirect:" + redirectURL;
+    if (loginMember == null) {
+      log.info("===========if (loginMember == null)===============");
+      bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다");
+      return LOGIN_FORM_HTML;
     }
+    //세션이 있으면 세션 반환, 없으면 신규 세션을 생성
+    HttpSession session = request.getSession();
+    //세션에 로그인 회원 정보 보관
+    session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+    log.info("redirectURL = ", redirectURL);
+
+    return "redirect:" + redirectURL;
+  }
 //
 //    @PostMapping("/logout")
 //    public String logout(HttpServletRequest request) {
