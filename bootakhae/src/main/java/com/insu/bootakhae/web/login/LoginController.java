@@ -1,9 +1,17 @@
 package com.insu.bootakhae.web.login;
 
 
+import com.insu.bootakhae.domain.information.member.Member;
 import com.insu.bootakhae.domain.information.member.MemberEntity;
+import com.insu.bootakhae.domain.information.member.MemberResponse;
 import com.insu.bootakhae.domain.login.LoginService;
 import com.insu.bootakhae.web.SessionConst;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -19,16 +27,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+//@Tag(name = "Login", description = "Login API")
 public class LoginController {
+
 
   private final LoginService loginService;
   private static final String LOGIN_FORM_HTML = "login/loginForm";
 
+
+  @Operation(summary = "로그인 화면", description = "로그인 화면", tags = {"LoginController"})
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "OK"),
+      @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+      @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+      @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+  })
   @GetMapping("/login")
   public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
     return LOGIN_FORM_HTML;
   }
 
+  @Operation(summary = "로그인 요청", description = "로그인 요청", tags = {"LoginController"})
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "OK",
+          content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+  })
   @PostMapping("/login")
   public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
       HttpServletRequest request,
