@@ -77,13 +77,18 @@ public class LoginController {
 
     return "redirect:" + redirectURL;
   }
-//
-//    @PostMapping("/logout")
-//    public String logout(HttpServletRequest request) {
-//        HttpSession session = request.getSession(false);//세션이 없으면 새로 만들지 않음
-//        if (session != null) {
-//            session.invalidate();
-//        }
-//        return "redirect:/";
-//    }
+
+  @Operation(summary = "로그아웃 요청", description = "로그아웃 요청", tags = {"LoginController"})
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "OK",
+          content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+  })
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);//세션이 없으면 새로 만들지 않음
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
 }
