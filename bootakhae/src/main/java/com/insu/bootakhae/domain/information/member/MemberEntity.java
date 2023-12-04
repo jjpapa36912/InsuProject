@@ -6,13 +6,14 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Entity(name = "member")
 @Data
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@ToString(of = {"id", "username", "age"})
+@ToString(of = {"id", "username", "age"})
 public class MemberEntity {
 
   public MemberEntity(String loginId, String name, String password) {

@@ -21,9 +21,6 @@ public class LogInterceptor implements HandlerInterceptor {
 
     request.setAttribute(LOG_ID, uuid);
 
-    //@RequestMapping : HandlerMethod
-    // 정적 리소스 : ResourceHttpRequestHandler
-
     if (handler instanceof HandlerMethod) {
       HandlerMethod hm = (HandlerMethod) handler;//호출할  컨트롤러 메서드의 모든 정보가 포함되어 있다
     }
@@ -36,14 +33,14 @@ public class LogInterceptor implements HandlerInterceptor {
 
   @Override
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-      ModelAndView modelAndView) throws Exception {
+      ModelAndView modelAndView) {
     log.info("postHandle222222 [{}]", modelAndView);
 
   }
 
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-      Object handler, Exception ex) throws Exception {
+      Object handler, Exception ex) {
 
     String requestURI = request.getRequestURI();
     String logId = (String) request.getAttribute(LOG_ID);

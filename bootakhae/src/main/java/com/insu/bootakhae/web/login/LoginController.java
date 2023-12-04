@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @Slf4j
 @RequiredArgsConstructor
 //@Tag(name = "Login", description = "Login API")
@@ -83,12 +84,12 @@ public class LoginController {
       @ApiResponse(responseCode = "200", description = "OK",
           content = @Content(schema = @Schema(implementation = MemberResponse.class))),
   })
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);//세션이 없으면 새로 만들지 않음
-        if (session != null) {
-            session.invalidate();
-        }
-        return "redirect:/";
+  @PostMapping("/logout")
+  public String logout(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);//세션이 없으면 새로 만들지 않음
+    if (session != null) {
+      session.invalidate();
     }
+    return "redirect:/";
+  }
 }

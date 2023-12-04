@@ -1,7 +1,6 @@
 package com.insu.bootakhae.config;
 
 import com.insu.bootakhae.web.argumentresolver.LoginMemberArgumentResolver;
-import com.insu.bootakhae.web.interceptor.LogInterceptor;
 import com.insu.bootakhae.web.interceptor.LoginCheckInterceptor;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -21,15 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new LogInterceptor())
+    registry.addInterceptor(new LoginCheckInterceptor())
         .order(1)
         .addPathPatterns("/**")
-        .excludePathPatterns("/css/**", "/*.ico", "/error");
-
-    registry.addInterceptor(new LoginCheckInterceptor())
-        .order(2)
-        .addPathPatterns("/**")
-        .excludePathPatterns("/", "/members/add", "/login", "/logout", "/css/**", "/*.ico", "/error");
+        .excludePathPatterns("/", "/members/add", "/login", "/logout", "/css/**", "/*.ico",
+            "/error", "/swagger-ui/**", "/api-docs/**");
   }
 
   @Bean
