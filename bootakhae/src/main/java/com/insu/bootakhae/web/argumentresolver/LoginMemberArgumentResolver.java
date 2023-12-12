@@ -1,6 +1,6 @@
 package com.insu.bootakhae.web.argumentresolver;
 
-import com.insu.bootakhae.domain.information.member.Member;
+import com.insu.bootakhae.business.login.domain.Member;
 import com.insu.bootakhae.web.SessionConst;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
