@@ -1,8 +1,26 @@
 import React from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 
-const Main = ({ loginId, onLogout }) => {
-  const { data } = useParams();
+const Main = () => {
+  const {data} = useParams();
+  const navigate = useNavigate();
+
+  const onLogout = async () => {
+    try {
+      const response = await axios.get('/logout');
+      if (response.status === 200) {
+        console.log('Login successful');
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Login failed', error);
+
+    }
+
+    // navigate('/logout');
+  }
+
   return (
       <div>
         <h2>Welcome, {data}!</h2>
