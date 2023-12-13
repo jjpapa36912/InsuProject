@@ -1,10 +1,8 @@
 package com.insu.bootakhae.web.login;
 
 
-import com.insu.bootakhae.business.login.domain.LoginForm;
 import com.insu.bootakhae.business.login.domain.Member;
 import com.insu.bootakhae.business.login.domain.MemberEntity;
-import com.insu.bootakhae.business.login.domain.MemberResponse;
 import com.insu.bootakhae.business.login.service.LoginService;
 import com.insu.bootakhae.web.SessionConst;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,22 +12,17 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@CrossOrigin()
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -55,7 +48,7 @@ public class LoginController {
   @Operation(summary = "로그아웃 요청", description = "로그아웃 요청", tags = {"LoginController"})
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "OK",
-          content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+          content = @Content(schema = @Schema(implementation = MemberEntity.class))),
   })
   @GetMapping("/logout")
   public ResponseEntity<String> logout(HttpServletRequest request) {

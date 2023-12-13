@@ -13,11 +13,11 @@ import lombok.ToString;
 @Data
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"loginId", "name", "password"})
+@ToString(of = {"userId", "name", "password"})
 public class MemberEntity {
 
-  public MemberEntity(String loginId, String name, String password) {
-    this.loginId = loginId;
+  public MemberEntity(String userId, String name, String password) {
+    this.userId = userId;
     this.name = name;
     this.password = password;
   }
@@ -28,8 +28,8 @@ public class MemberEntity {
   private Long id;
 
   @NotEmpty
-  @Column(name = "login_id")
-  private String loginId; // 로그인 id
+  @Column(name = "user_id")
+  private String userId; // 로그인 id
   @NotEmpty
   @Column(name = "name")
   private String name; // 사용자 이름

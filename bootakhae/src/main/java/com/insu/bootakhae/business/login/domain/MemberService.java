@@ -25,7 +25,7 @@ public class MemberService {
   }
 
   public MemberEntity findMemberEntityByLoginIdEquals(String loginId) {
-    return memberRepository.findMemberEntityByLoginIdEquals(loginId);
+    return memberRepository.findMemberEntityByUserIdEquals(loginId);
   }
 
 }

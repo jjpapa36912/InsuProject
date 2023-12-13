@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import {Container} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import LoginForm from './pages/user/LoginForm.js'
 import Main from './pages/Main'
+import Header from "./layout/Header";
+import BoardList from "./components/BoardList";
 
 const App = () => {
   return (
-      <Router>
-        <Routes>
-          {/*<Switch>*/}
-          <Route path="/login" element={<LoginForm />}/>
-          <Route path="/main/:data" element={<Main />}/>
-          {/*</Switch>*/}
-        </ Routes>
-        {/* Add more routes as needed */}
-      </Router>
+      <div>
+        <Router>
+          <Header/>
+          <Routes>
+            {/*<Switch>*/}
+            {/*<Route path="/login" element={<LoginForm/>}/>*/}
+            <Route path="/main" element={<Main/>}/>
+            <Route path="/board" element={<BoardList />} />
+            {/*</Switch>*/}
+          </ Routes>
+          {/* Add more routes as needed */}
+        </Router>
+      </div>
   )
       ;
 };

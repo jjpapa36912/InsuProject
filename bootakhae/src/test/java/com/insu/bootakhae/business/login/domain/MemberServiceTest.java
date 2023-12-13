@@ -1,15 +1,13 @@
-package com.insu.bootakhae.business.information.member;
+package com.insu.bootakhae.business.login.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import com.insu.bootakhae.business.login.domain.MemberEntity;
 import com.insu.bootakhae.business.login.domain.MemberService;
-import jakarta.transaction.Transactional;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
 @SpringBootTest
 //@Transactional
@@ -27,7 +25,7 @@ class MemberServiceTest {
 
     List<MemberEntity> all = memberService.findAll();
 
-    assertThat(all.get(0).getLoginId()).isEqualTo("djk");
+    assertThat(all.get(0).getUserId()).isEqualTo("djk");
   }
 
 }
