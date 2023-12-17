@@ -28,7 +28,6 @@ public class LoginController {
 
 
   private final LoginService loginService;
-  private static final String LOGIN_FORM_HTML = "login/loginForm";
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody Member loginRequest,

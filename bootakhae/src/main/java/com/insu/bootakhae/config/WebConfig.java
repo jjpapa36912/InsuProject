@@ -1,13 +1,11 @@
 package com.insu.bootakhae.config;
 
-import com.insu.bootakhae.web.argumentresolver.LoginMemberArgumentResolver;
-import com.insu.bootakhae.web.interceptor.LoginCheckInterceptor;
+import com.insu.bootakhae.web.utils.argumentresolver.LoginMemberArgumentResolver;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration

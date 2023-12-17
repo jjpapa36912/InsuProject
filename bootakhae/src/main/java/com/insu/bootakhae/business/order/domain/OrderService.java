@@ -1,14 +1,15 @@
 package com.insu.bootakhae.business.order.domain;
 
-import com.insu.bootakhae.business.login.domain.MemberRepository;
 import java.util.List;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class OrderService {
 
   OrderRepository orderRepository;
@@ -18,8 +19,24 @@ public class OrderService {
     this.orderRepository = orderRepository;
   }
 
-  public OrderEntity save(OrderEntity orderEntity) {
-    return orderRepository.save(orderEntity);
+  public void save(OrderEntity orderEntity) {
+    Optional<OrderEntity> foundedOrderEntityById =
+        orderRepository.findById(orderEntity.getId());
+    if (foundedOrderEntityById == null) {
+      orderRepository.save(orderEntity);
+    } else {
+      update(orderEntity, foundedOrderEntityById);
+    }
+  }
+
+  public void update(OrderEntity orderEntity,
+      Optional<OrderEntity> foundedOrderEntityById) {
+    Optional.ofNullable(orderEntity.getOrderTitle()).ifPresent(
+        c -> foundedOrderEntityById.get()
+            .setOrderTitle(orderEntity.getOrderTitle()));
+    Optional.ofNullable(orderEntity.getOrderContents()).ifPresent(
+        c -> foundedOrderEntityById.get()
+            .setOrderContents(orderEntity.getOrderContents()));
   }
 
   public List<OrderEntity> findAll() {

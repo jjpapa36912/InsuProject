@@ -1,6 +1,5 @@
 package com.insu.bootakhae.business.order.domain;
 
-import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -9,6 +8,8 @@ public class Order {
 
   private Long id;
   private String userId;
+  private String orderTitle;
+  private String orderContents;
   private String orderAcceptor;
   private LocalDateTime orderTime;
   private String orderStatus;

@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Main from './pages/Main'
 import Header from "./layout/Header";
 import BoardList from "./components/BoardList";
+import BoardDetailView from "./pages/BoardDetailView";
+import BoardEditView from "./pages/BoardEditView";
 
 const App = () => {
   return (
@@ -13,7 +15,9 @@ const App = () => {
             {/*<Switch>*/}
             {/*<Route path="/login" element={<LoginForm/>}/>*/}
             <Route path="/main" element={<Main/>}/>
-            <Route path="/board" element={<BoardList />} />
+            <Route path="/boardList" element={<BoardList />} />
+            <Route path="/boardDetailView/:id" element={<BoardDetailView />} />
+            <Route path="/boardEditView/:id" element={<BoardEditView />} />
             {/*</Switch>*/}
           </ Routes>
           {/* Add more routes as needed */}

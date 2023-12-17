@@ -21,20 +21,21 @@ class OrderServiceTest {
 
   @Test
   void save() {
-    OrderEntity orderEntity1 = new OrderEntity("djk", "jjj",
-        LocalDateTime.now(), "주문완료", "결제대기", 100, 3, 300);
-    OrderEntity orderEntity2 = new OrderEntity("djk1", "jjj1",
-        LocalDateTime.now(), "주문대기", "결제대기", 200, 4, 800);
-    OrderEntity orderEntity3 = new OrderEntity("djk2", "jjj2",
-        LocalDateTime.now(), "주문완료", "결제완료", 200, 5, 1000);
+    OrderEntity orderEntity1 = new OrderEntity("djk", "title1", "contents1",
+        "jjj", LocalDateTime.now(), "주문완료", "결제대기", 100, 3, 300);
+    OrderEntity orderEntity2 = new OrderEntity("djk1", "title2", "contents2",
+        "jjj1", LocalDateTime.now(), "주문대기", "결제대기", 200, 4, 800);
+    OrderEntity orderEntity3 = new OrderEntity("djk2", "title3", "contents3",
+        "jjj2", LocalDateTime.now(), "주문완료", "결제완료", 200, 5, 1000);
 
     orderService.save(orderEntity1);
     orderService.save(orderEntity2);
     orderService.save(orderEntity3);
 
-    assertThat(
-        orderService.findByUserId("djk").get().getOrderAcceptor()).isEqualTo(
-        "jjj");
+    OrderEntity orderEntity = orderService.findByUserId("djk")
+        .orElseThrow(NullPointerException::new);
+
+    assertThat(orderEntity.getOrderAcceptor()).isEqualTo("jjj");
     assertThat(
         orderService.findByUserId("djk1").get().getOrderAcceptor()).isEqualTo(
         "jjj1");

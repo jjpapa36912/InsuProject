@@ -42,12 +42,12 @@ const Header = () => {
   }
   return (
       <header>
-        <link rel="stylesheet" href="../css/styles.css"/>
+        {/*<link rel="stylesheet" href="../css/styles.css"/>*/}
         <div>
           &nbsp;&nbsp;|&nbsp;&nbsp;
           <Link to="/">홈</Link>
           &nbsp;&nbsp;|&nbsp;&nbsp;
-          <Link to="/board">게시판</Link>
+          <Link to="/boardList">게시판</Link>
           &nbsp;&nbsp;|&nbsp;&nbsp;
           {isLoggedIn ? (
               <span>
@@ -55,7 +55,8 @@ const Header = () => {
                 <button onClick={onLogout}>Logout</button>
               </span>
           ) : (
-              <span class='right-align'>
+              // <span class='right-align'>
+              <span>
                 <label>Username:</label>
                 <input type="text"
                        onChange={(e) => setLoginId(e.target.value)}/>
@@ -65,7 +66,7 @@ const Header = () => {
                        onChange={(e) => setPassword(e.target.value)}/>
 
                 <button onClick={handleLogin}>Login</button>
-              </span>)};
+              </span>)}
           <hr/>
         </div>
       </header>

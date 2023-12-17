@@ -15,10 +15,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderEntity {
 
-  public OrderEntity(String userId, String orderAcceptor, LocalDateTime orderTime,
-      String orderStatus, String orderPaymentStatus, Integer orderPrice,
+  public OrderEntity(String userId, String orderTitle,
+      String orderContents, String orderAcceptor,
+      LocalDateTime orderTime, String orderStatus,
+      String orderPaymentStatus, Integer orderPrice,
       Integer orderNumber, Integer orderTotalPrice) {
     this.userId = userId;
+    this.orderTitle = orderTitle;
+    this.orderContents = orderContents;
     this.orderAcceptor = orderAcceptor;
     this.orderTime = orderTime;
     this.orderStatus = orderStatus;
@@ -34,6 +38,10 @@ public class OrderEntity {
   private Long id;
   @Column(name = "user_id")
   private String userId;
+  @Column(name = "order_title")
+  private String orderTitle;
+  @Column(name = "order_contents")
+  private String orderContents;
   @Column(name = "order_acceptor")
   private String orderAcceptor;
   @Column(name = "order_time")
