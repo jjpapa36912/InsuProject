@@ -1,43 +1,34 @@
 package com.insu.bootakhae.business.order.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.insu.bootakhae.business.login.domain.MemberEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "orders")
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class OrderEntity {
-
-  public OrderEntity(String userId, String orderTitle,
-      String orderContents, String orderAcceptor,
-      LocalDateTime orderTime, String orderStatus,
-      String orderPaymentStatus, Integer orderPrice,
-      Integer orderNumber, Integer orderTotalPrice) {
-    this.userId = userId;
-    this.orderTitle = orderTitle;
-    this.orderContents = orderContents;
-    this.orderAcceptor = orderAcceptor;
-    this.orderTime = orderTime;
-    this.orderStatus = orderStatus;
-    this.orderPaymentStatus = orderPaymentStatus;
-    this.orderPrice = orderPrice;
-    this.orderNumber = orderNumber;
-    this.orderTotalPrice = orderTotalPrice;
-  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_id")
   private Long id;
-  @Column(name = "user_id")
-  private String userId;
+  @Column(name = "order_user")
+  private String orderUser;
   @Column(name = "order_title")
   private String orderTitle;
   @Column(name = "order_contents")
@@ -57,5 +48,10 @@ public class OrderEntity {
   @Column(name = "order_total_price")
   private Integer orderTotalPrice;
 
+  @NotNull
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "member_id")
+  private MemberEntity memberEntity;
 
 }

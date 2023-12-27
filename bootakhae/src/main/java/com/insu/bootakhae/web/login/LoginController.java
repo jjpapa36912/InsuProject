@@ -30,18 +30,19 @@ public class LoginController {
   private final LoginService loginService;
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody Member loginRequest,
+  public ResponseEntity<MemberEntity> login(@RequestBody Member loginRequest,
       HttpServletRequest request) {
     MemberEntity memberEntity = loginService.login(loginRequest.getLoginId(),
         loginRequest.getPassword());
 
-    if (memberEntity != null && memberEntity.getPassword().equals(loginRequest.getPassword())) {
+    if (memberEntity != null && memberEntity.getPassword()
+        .equals(loginRequest.getPassword())) {
       HttpSession session = request.getSession();
       session.setAttribute(SessionConst.LOGIN_MEMBER, memberEntity);
-      return ResponseEntity.ok("Login successful");
+      return ResponseEntity.ok()
+          .body(memberEntity);
     }
-
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(memberEntity);
   }
 
   @Operation(summary = "로그아웃 요청", description = "로그아웃 요청", tags = {"LoginController"})

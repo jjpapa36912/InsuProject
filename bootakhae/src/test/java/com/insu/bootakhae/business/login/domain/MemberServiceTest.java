@@ -20,8 +20,12 @@ class MemberServiceTest {
   @Test
   void save() {
     MemberEntity memberEntity = new MemberEntity("djk", "djk", "1234");
+    MemberEntity memberEntity1 = new MemberEntity("djk1", "djk1", "1234");
+    MemberEntity memberEntity2 = new MemberEntity("djk2", "djk2", "1234");
 
     memberService.save(memberEntity);
+    memberService.save(memberEntity1);
+    memberService.save(memberEntity2);
 
     List<MemberEntity> all = memberService.findAll();
 
