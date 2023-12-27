@@ -33,7 +33,7 @@ const BoardEditView = () => {
         console.log('Edit order successful');
       }
     } catch (error) {
-      console.log('Failed to save edit order data!', error);
+      console.log('Failed to save edited order data!', error);
     }
   }
 

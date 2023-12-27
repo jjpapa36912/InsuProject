@@ -3,6 +3,9 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 
+export const MEMBER_ENTITY_ID_SESSION = 'memberId'
+export const MEMBER_ENTITY_USER_ID_SESSION = 'userId'
+
 const Header = () => {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +22,8 @@ const Header = () => {
 
       if (response.status === 200) {
         console.log('Login successful');
+        sessionStorage.setItem(MEMBER_ENTITY_ID_SESSION, response.data.id);
+        sessionStorage.setItem(MEMBER_ENTITY_USER_ID_SESSION, response.data.userId);
         setLoggedIn(true);
         navigate('/main');
       }
@@ -32,6 +37,8 @@ const Header = () => {
       const response = await axios.get('/logout');
       if (response.status === 200) {
         console.log('Login successful');
+        sessionStorage.removeItem(MEMBER_ENTITY_ID_SESSION);
+        sessionStorage.removeItem(MEMBER_ENTITY_USER_ID_SESSION);
         setLoggedIn(false);
         navigate('/main');
       }
@@ -55,7 +62,6 @@ const Header = () => {
                 <button onClick={onLogout}>Logout</button>
               </span>
           ) : (
-              // <span class='right-align'>
               <span>
                 <label>Username:</label>
                 <input type="text"

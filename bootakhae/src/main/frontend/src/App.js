@@ -5,6 +5,7 @@ import Header from "./layout/Header";
 import BoardList from "./components/BoardList";
 import BoardDetailView from "./pages/BoardDetailView";
 import BoardEditView from "./pages/BoardEditView";
+import BoardWriteOrderView from "./pages/BoardWriteOrderView";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             {/*<Route path="/login" element={<LoginForm/>}/>*/}
             <Route path="/main" element={<Main/>}/>
             <Route path="/boardList" element={<BoardList />} />
+            <Route path="/boardWriteOrderView" element={<BoardWriteOrderView />} />
             <Route path="/boardDetailView/:id" element={<BoardDetailView />} />
             <Route path="/boardEditView/:id" element={<BoardEditView />} />
             {/*</Switch>*/}

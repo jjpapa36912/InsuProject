@@ -10,7 +10,6 @@ const BoardDetailView = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post('/boardItem/'+id.id);
-        console.log("!!!!!!!!!!!!!!"+response.data.userId);
         setOrderEntity(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
