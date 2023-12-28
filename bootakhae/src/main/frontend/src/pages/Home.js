@@ -1,10 +1,10 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
-const Main = () => {
+const Home = () => {
   const navigate = useNavigate();
-  navigate('/board');
+  navigate('/home');
   return null;
 }
 
-export default Main;
+export default Home;

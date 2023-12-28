@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Main from './pages/Main'
+import Home from './pages/Home'
 import Header from "./layout/Header";
 import BoardList from "./components/BoardList";
 import BoardDetailView from "./pages/BoardDetailView";
@@ -15,7 +15,7 @@ const App = () => {
           <Routes>
             {/*<Switch>*/}
             {/*<Route path="/login" element={<LoginForm/>}/>*/}
-            <Route path="/main" element={<Main/>}/>
+            <Route path="/home" element={<Home/>}/>
             <Route path="/boardList" element={<BoardList />} />
             <Route path="/boardWriteOrderView" element={<BoardWriteOrderView />} />
             <Route path="/boardDetailView/:id" element={<BoardDetailView />} />
