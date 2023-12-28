@@ -60,7 +60,7 @@ public class OrderController {
   public ResponseEntity<String> saveEditedOrder(@RequestBody Order order) {
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
-    orderService.save(orderEntity);
+    orderService.update(orderEntity);
     return ResponseEntity.ok("Succeeded to save edited order.");
   }
 

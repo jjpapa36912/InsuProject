@@ -2,7 +2,6 @@ package com.insu.bootakhae.business.order.domain;
 
 import com.insu.bootakhae.business.login.domain.MemberEntity;
 import com.insu.bootakhae.business.login.domain.MemberRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,46 +29,40 @@ public class OrderService {
   }
 
   public void save(OrderEntity orderEntity) {
-    if (orderEntity.getId() == null) {
-      orderEntity.setMemberEntity(
-          memberRepository.findMemberEntityByUserIdEquals(
-              orderEntity.getOrderUser()));
       orderRepository.save(orderEntity);
-    } else {
-      Optional<OrderEntity> foundedOrderEntityById =
-          orderRepository.findById(orderEntity.getId());
-      update(orderEntity, foundedOrderEntityById);
-    }
   }
 
-  public void update(OrderEntity orderEntity,
-      Optional<OrderEntity> foundedOrderEntityById) {
+  public void update(OrderEntity orderEntity) {
+
+    OrderEntity foundedOrderEntityById =
+        orderRepository.findById(orderEntity.getId()).get();
+
     Optional.ofNullable(orderEntity.getOrderTitle()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderTitle(orderEntity.getOrderTitle()));
     Optional.ofNullable(orderEntity.getOrderContents()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderContents(orderEntity.getOrderContents()));
     Optional.ofNullable(orderEntity.getOrderAcceptor()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderAcceptor(orderEntity.getOrderAcceptor()));
     Optional.ofNullable(orderEntity.getOrderTime()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderTime(orderEntity.getOrderTime()));
     Optional.ofNullable(orderEntity.getOrderStatus()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderStatus(orderEntity.getOrderStatus()));
     Optional.ofNullable(orderEntity.getOrderPaymentStatus()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderPaymentStatus(orderEntity.getOrderPaymentStatus()));
     Optional.ofNullable(orderEntity.getOrderPrice()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderPrice(orderEntity.getOrderPrice()));
     Optional.ofNullable(orderEntity.getOrderNumber()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderNumber(orderEntity.getOrderNumber()));
     Optional.ofNullable(orderEntity.getOrderTotalPrice()).ifPresent(
-        c -> foundedOrderEntityById.get()
+        c -> foundedOrderEntityById
             .setOrderTotalPrice(orderEntity.getOrderTotalPrice()));
   }
 
