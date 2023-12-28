@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +41,8 @@ public class OrderController {
 
   }
 
-  @PostMapping("/boardWriteOrder")
-  public ResponseEntity<String> saveOrder(
+  @PostMapping("/registerOrder")
+  public ResponseEntity<String> registerOrder(
       @RequestBody Order order) {
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
@@ -56,13 +57,19 @@ public class OrderController {
     return ResponseEntity.ok(orderEntity.get());
   }
 
-  @PostMapping("/saveEditedOrder")
-  public ResponseEntity<String> saveEditedOrder(@RequestBody Order order) {
+  @PostMapping("/updateOrder")
+  public ResponseEntity<String> updateOrder(@RequestBody Order order) {
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
     orderService.update(orderEntity);
     return ResponseEntity.ok("Succeeded to save edited order.");
   }
 
-
+  @PostMapping("/deleteOrder")
+  public ResponseEntity<String> deleteOrder(@RequestBody Order order) {
+    OrderEntity orderEntity = objectMapper.convertValue(order,
+        OrderEntity.class);
+    orderService.delete(orderService.findById(orderEntity.getId()).get());
+    return ResponseEntity.ok("Succeeded to delete order");
+  }
 }

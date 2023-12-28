@@ -15,18 +15,21 @@ const Header = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/login', {
+      await axios.post('/login', {
         loginId,
         password,
+      }).then(response => {
+        if (response.status === 200) {
+          console.log('Login successful');
+          sessionStorage.setItem(MEMBER_ENTITY_ID_SESSION, response.data.id);
+          sessionStorage.setItem(MEMBER_ENTITY_USER_ID_SESSION, response.data.userId);
+          console.log(">>>"+sessionStorage.getItem(MEMBER_ENTITY_USER_ID_SESSION))
+          setLoggedIn(true);
+          // navigate('/main');
+        }
       });
 
-      if (response.status === 200) {
-        console.log('Login successful');
-        sessionStorage.setItem(MEMBER_ENTITY_ID_SESSION, response.data.id);
-        sessionStorage.setItem(MEMBER_ENTITY_USER_ID_SESSION, response.data.userId);
-        setLoggedIn(true);
-        navigate('/main');
-      }
+
     } catch (error) {
       console.error('Login failed', error);
     }

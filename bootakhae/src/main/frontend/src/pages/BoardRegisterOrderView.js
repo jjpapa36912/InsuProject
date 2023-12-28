@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, ButtonGroup} from "react-bootstrap";
-import MEMBER_ENTITY_USER_ID_SESSION from "../layout/Header";
+import {MEMBER_ENTITY_USER_ID_SESSION} from "../layout/Header";
 import {useNavigate} from "react-router-dom";
 
-const BoardWriteOrderView = () => {
+const BoardRegisterOrderView = () => {
   const [orderTitle, setOrderTitle] = useState();
   const [orderContents, setOrderContents] = useState();
   const orderUser = sessionStorage.getItem(MEMBER_ENTITY_USER_ID_SESSION)
   const navigate = useNavigate()
 
 
+
   const handleWriteCompleteClick = async () => {
-    await axios.post("/boardWriteOrder", {
+    await axios.post("/registerOrder", {
       orderUser,
       orderTitle,
       orderContents
@@ -31,7 +32,7 @@ const BoardWriteOrderView = () => {
         <h2>Registration View</h2>
         <div>
           <p>User ID: </p><textarea
-            value={sessionStorage.getItem(MEMBER_ENTITY_USER_ID_SESSION)}
+            value={orderUser}
             rows={1} // Specify the number of visible rows
             cols={10} // Specify the number of visible columns
         />
@@ -59,4 +60,4 @@ const BoardWriteOrderView = () => {
   );
 };
 
-export default BoardWriteOrderView;
+export default BoardRegisterOrderView;

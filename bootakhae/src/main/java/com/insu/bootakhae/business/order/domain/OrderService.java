@@ -78,10 +78,7 @@ public class OrderService {
     return orderRepository.findAllJoinMemberEntity();
   }
 
-  private Map<Long, MemberEntity> extractedMemberEntities(
-      List<MemberEntity> allOrderEntityJoinMemberEntity) {
-    return allOrderEntityJoinMemberEntity.stream()
-        .collect(Collectors.toMap(MemberEntity::getId, Function.identity()));
-
+  public void delete(OrderEntity orderEntity) {
+    orderRepository.delete(orderEntity);
   }
 }

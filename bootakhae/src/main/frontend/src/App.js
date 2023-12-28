@@ -5,7 +5,7 @@ import Header from "./layout/Header";
 import BoardList from "./components/BoardList";
 import BoardDetailView from "./pages/BoardDetailView";
 import BoardEditView from "./pages/BoardEditView";
-import BoardWriteOrderView from "./pages/BoardWriteOrderView";
+import BoardRegisterOrderView from "./pages/BoardRegisterOrderView";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
             {/*<Route path="/login" element={<LoginForm/>}/>*/}
             <Route path="/home" element={<Home/>}/>
             <Route path="/boardList" element={<BoardList />} />
-            <Route path="/boardWriteOrderView" element={<BoardWriteOrderView />} />
+            <Route path="/boardRegisterOrderView" element={<BoardRegisterOrderView />} />
             <Route path="/boardDetailView/:id" element={<BoardDetailView />} />
             <Route path="/boardEditView/:id" element={<BoardEditView />} />
             {/*</Switch>*/}

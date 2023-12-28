@@ -23,7 +23,7 @@ const BoardEditView = () => {
 
   const handleEditCompleteClick = async () => {
     try {
-      const response = await axios.post('/saveEditedOrder', {
+      const response = await axios.post('/updateOrder', {
         id,
         orderTitle,
         orderContents,
