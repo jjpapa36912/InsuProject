@@ -3,6 +3,7 @@ package com.insu.bootakhae.business.order.domain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.insu.bootakhae.business.login.domain.MemberEntity;
 import com.insu.bootakhae.business.login.domain.MemberRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -96,6 +97,7 @@ public class OrderService {
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
     orderEntity.setMemberEntity(memberEntity.get());
+    orderEntity.setOrderTime(LocalDateTime.now());
     orderRepository.save(orderEntity);
 
   }
