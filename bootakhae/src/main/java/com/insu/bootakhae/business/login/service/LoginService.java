@@ -2,6 +2,7 @@ package com.insu.bootakhae.business.login.service;
 
 import com.insu.bootakhae.business.login.domain.MemberEntity;
 import com.insu.bootakhae.business.login.domain.MemberService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class LoginService {
    */
   public MemberEntity login(String loginId, String password) {
 
-    MemberEntity memberEntity = memberService.findMemberEntityByLoginIdEquals(loginId);
+    MemberEntity memberEntity = memberService.findMemberEntityByLoginIdEquals(
+        loginId);
 
     log.info("memberEntity.get()>> ", memberEntity);
 

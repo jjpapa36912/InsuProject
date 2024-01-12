@@ -33,7 +33,7 @@ public class OrderController {
     this.orderService = orderService;
   }
 
-  @GetMapping("/boardList")
+  @GetMapping("/orderList")
   public ResponseEntity<List<MemberEntity>> getBoardList() {
     List<MemberEntity> memberEntities =
         orderService.findAllJoinMemberEntity();
@@ -44,13 +44,11 @@ public class OrderController {
   @PostMapping("/registerOrder")
   public ResponseEntity<String> registerOrder(
       @RequestBody Order order) {
-    OrderEntity orderEntity = objectMapper.convertValue(order,
-        OrderEntity.class);
-    orderService.save(orderEntity);
+    orderService.registerOrder(order);
     return ResponseEntity.ok("Succeed save order.");
   }
 
-  @PostMapping("/boardItem/{id}")
+  @PostMapping("/orderDetail/{id}")
   public ResponseEntity<OrderEntity> getBoardItemById(
       @PathVariable("id") Optional<Long> id) {
     Optional<OrderEntity> orderEntity = orderService.findById(id.get());
@@ -59,6 +57,9 @@ public class OrderController {
 
   @PostMapping("/updateOrder")
   public ResponseEntity<String> updateOrder(@RequestBody Order order) {
+    if (order.getId() == null) {
+      ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID is Null");
+    }
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
     orderService.update(orderEntity);

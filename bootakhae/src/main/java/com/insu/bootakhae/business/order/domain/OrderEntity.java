@@ -1,6 +1,10 @@
 package com.insu.bootakhae.business.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.insu.bootakhae.business.login.domain.MemberEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +41,8 @@ public class OrderEntity {
   private String orderContents;
   @Column(name = "order_acceptor")
   private String orderAcceptor;
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @Column(name = "order_time")
   private LocalDateTime orderTime;
   @Column(name = "order_status")
