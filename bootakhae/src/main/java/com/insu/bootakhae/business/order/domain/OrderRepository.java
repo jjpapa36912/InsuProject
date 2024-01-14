@@ -11,4 +11,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
   @Query("select m from member m join fetch m.orderEntities o")
   List<MemberEntity> findAllJoinMemberEntity();
+
+  List<OrderEntity> findByOrderUser(String orderUser);
 }

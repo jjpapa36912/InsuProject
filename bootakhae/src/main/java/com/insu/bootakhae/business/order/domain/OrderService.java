@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,6 @@ public class OrderService {
   }
 
   public void update(OrderEntity orderEntity) {
-
     Optional<OrderEntity> foundedByOrderEntityIdOptional =
         orderRepository.findById(orderEntity.getId());
 
@@ -76,8 +76,13 @@ public class OrderService {
     return orderRepository.findAll();
   }
 
-  public Optional<OrderEntity> findById(Long id) {
-    return orderRepository.findById(id);
+  public OrderEntity findById(Long id) {
+    Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+    if (orderEntity.isPresent()) {
+      return orderEntity.get();
+    } else {
+      throw new NotFoundException("Failed to find orderEntity by id.");
+    }
   }
 
   public List<MemberEntity> findAllJoinMemberEntity() {
@@ -99,6 +104,9 @@ public class OrderService {
     orderEntity.setMemberEntity(memberEntity.get());
     orderEntity.setOrderTime(LocalDateTime.now());
     orderRepository.save(orderEntity);
+  }
 
+  public List<OrderEntity> getUserOrder(Order order) {
+    return orderRepository.findByOrderUser(order.getOrderUser());
   }
 }

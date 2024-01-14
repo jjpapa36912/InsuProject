@@ -50,9 +50,9 @@ public class OrderController {
 
   @PostMapping("/orderDetail/{id}")
   public ResponseEntity<OrderEntity> getBoardItemById(
-      @PathVariable("id") Optional<Long> id) {
-    Optional<OrderEntity> orderEntity = orderService.findById(id.get());
-    return ResponseEntity.ok(orderEntity.get());
+      @PathVariable("id") Long id) {
+    OrderEntity orderEntity = orderService.findById(id);
+    return ResponseEntity.ok(orderEntity);
   }
 
   @PostMapping("/updateOrder")
@@ -70,7 +70,12 @@ public class OrderController {
   public ResponseEntity<String> deleteOrder(@RequestBody Order order) {
     OrderEntity orderEntity = objectMapper.convertValue(order,
         OrderEntity.class);
-    orderService.delete(orderService.findById(orderEntity.getId()).get());
+    orderService.delete(orderService.findById(orderEntity.getId()));
     return ResponseEntity.ok("Succeeded to delete order");
+  }
+
+  @PostMapping("/getUserOrder")
+  public ResponseEntity<List<OrderEntity>> getMyOrder(@RequestBody Order order) {
+    return ResponseEntity.ok(orderService.getUserOrder(order));
   }
 }
